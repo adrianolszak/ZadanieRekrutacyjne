@@ -1,5 +1,7 @@
 package com.component.CreditComponent;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,16 +29,12 @@ public class CheckOperations {
 		int year = cal.get(Calendar.YEAR);
 		return year;
 	}
-	public static boolean daty(Operations operation, String dataFrom, String dataTo){
-		List<String> dataF = Arrays.asList(dataFrom.split("\\."));
-		List<String> dataC = Arrays.asList(operation.getDate().split("\\."));
-		List<String> dataT = Arrays.asList(dataTo.split("\\."));
-		double w1 = Integer.parseInt(dataF.get(0)) * 0.0001 + Integer.parseInt(dataF.get(1)) * 0.01 + Integer.parseInt(dataF.get(2));
-		double w2 = Integer.parseInt(dataC.get(0)) * 0.0001 + Integer.parseInt(dataC.get(1)) * 0.01 + Integer.parseInt(dataC.get(2));
-		double w3 = Integer.parseInt(dataT.get(0)) * 0.0001 + Integer.parseInt(dataT.get(1)) * 0.01 + Integer.parseInt(dataT.get(2));
-		if(w1 < w2 && w2 <= w3) {
-			return true;
-		}
+	public static boolean daty(Operations operation, String dataFrom, String dataTo) throws ParseException{
+		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+		Date today = formatter.parse(operation.getDate());
+		Date past = formatter.parse(dataFrom);
+		Date future = formatter.parse(dataTo);
+		if (past.before(today) && !future.before(today))return true;
 		return false;
 	}
 }

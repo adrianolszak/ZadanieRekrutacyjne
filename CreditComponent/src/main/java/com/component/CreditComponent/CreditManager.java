@@ -1,5 +1,6 @@
 package com.component.CreditComponent;
 
+import java.text.ParseException;
 import java.util.List;
 
 public class CreditManager {
@@ -65,13 +66,13 @@ public class CreditManager {
 		else credit.setOverpaymentAmount(operation.getValue());
 	}
 	
-	public void checkOperations(String dataFrom, String dataTo){
+	public void checkOperations(String dataFrom, String dataTo) throws ParseException{
 		if(operations != null){
 			for (Operations el : operations) changeValues(el,dataFrom,dataTo);
 		}
 	}
 	
-	public void changeValues(Operations operation, String dataFrom, String dataTo){
+	public void changeValues(Operations operation, String dataFrom, String dataTo) throws ParseException{
 		if(CheckOperations.daty(operation,dataFrom, dataTo)) makeOperation(operation); 
 	}
 	
@@ -79,7 +80,7 @@ public class CreditManager {
 		return installment - calculateInterestPart();
 	}
 	
-	public double mainCaluclate(){
+	public double mainCaluclate() throws ParseException{
 		int day = CheckOperations.getday();
 		int month = CheckOperations.getmonth();
 		int year = CheckOperations.getyear();
@@ -114,6 +115,8 @@ public class CreditManager {
 			}
 			old =  day + "." +month + "." + year;			
 		}
+		credit.setOverpaidAmount(0);
+		credit.setRepaidAmount((-1) * credit.getRepaidAmount());
 		credit.setDuration(duration);
 		return interestPortion;	
 	}

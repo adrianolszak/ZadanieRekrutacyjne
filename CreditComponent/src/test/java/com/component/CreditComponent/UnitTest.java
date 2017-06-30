@@ -49,6 +49,8 @@ public class UnitTest {
 		Operations operation = new Operations("Zmiana WIBOR", "22.07.2017", 2);
 		assertTrue(CheckOperations.daty(operation, "21.07.2017", "22.07.2017"));
 		assertTrue(CheckOperations.daty(operation, "21.07.2017", "23.07.2017"));
+		assertTrue(CheckOperations.daty(operation, "21.07.2017", "01.08.2017"));
+
 		assertFalse(CheckOperations.daty(operation, "21.07.2017", "20.07.2017"));
 	}
 	@Test
@@ -117,6 +119,7 @@ public class UnitTest {
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testmainCaluclate() throws ParseException{
+		assertEquals(137725.02, creditManager.mainCaluclate(), 0.01);
 		assertEquals(137725.02, creditManager.mainCaluclate(), 0.01);
 	}		
 	
