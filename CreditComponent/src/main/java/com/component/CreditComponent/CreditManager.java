@@ -8,7 +8,8 @@ public class CreditManager {
 	private List<Operations> operations;
 	private double installment;
 	private double WIBOR;
-	
+	private int duration;
+
 	public double getWIBOR() {
 		return WIBOR;
 	}
@@ -37,17 +38,26 @@ public class CreditManager {
 		this.credit = credit;
 		this.operations = operations;
 		this.WIBOR = credit.getwIBOR();
+		duration = credit.getDuration();
 		this.installment = calculateInstallment();
 	}
 	
 	public double calculateInstallment(){
-		return credit.getLoanAmount() * calculateCoefficient() * calculateInterest() / 3 / (calculateCoefficient() - 1); 
+		return (credit.getLoanAmount() - credit.getRepaidAmount()) * calculateCoefficient() * calculateInterest() / 3 / (calculateCoefficient() - 1); 
 	}
 	
 	public double calculateCoefficient(){
-		return Math.pow(1 + calculateInterest()/3, credit.getDuration());
+		return Math.pow(1 + calculateInterest()/3, duration);
 	}
 	
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
 	public double calculateInterest() {
         return (credit.getMargin() + WIBOR) / 100;
 	}
@@ -86,12 +96,11 @@ public class CreditManager {
 		int year = CheckOperations.getyear();
 		String old = "" + day + "." + month + "." + year;
 		int changeWibor=0;
-		int duration = credit.getDuration();
 		if(day>8) month += 1;
 		day = 10;
 		double interestPortion = 0;
 		while(true){
-			if (credit.getDuration() < 1) break;
+			if (duration < 1) break;
 			
 			month += 1;
 			if ((month % 13) == 0){
@@ -102,22 +111,25 @@ public class CreditManager {
 			if (changeWibor > 2) {
 				this.WIBOR = credit.getwIBOR();
 				changeWibor = 0;
+				this.installment = calculateInstallment();
 			}
 			else changeWibor++;
 			interestPortion += calculateInterestPart();
 			credit.setRepaidAmount(calculateCapitalPart());
-			credit.setDuration(credit.getDuration() - 1);
+			duration = duration - 1;
 			credit.setOverpaidAmount(credit.getOverpaidAmount() + credit.getOverpaymentAmount());
 			while(calculateCapitalPart() <= credit.getOverpaidAmount()){
 				credit.setOverpaidAmount(credit.getOverpaidAmount() - calculateCapitalPart());
-				credit.setDuration(credit.getDuration() - 1);
-				if (credit.getDuration() < 1) break;
+				duration = duration - 1;
+				if (duration < 1) break;
 			}
 			old =  day + "." +month + "." + year;			
 		}
+		System.out.println(credit.getRepaidAmount());
 		credit.setOverpaidAmount(0);
 		credit.setRepaidAmount((-1) * credit.getRepaidAmount());
-		credit.setDuration(duration);
+		this.duration = credit.getDuration();
+		this.installment = calculateInstallment();
 		return interestPortion;	
 	}
 }

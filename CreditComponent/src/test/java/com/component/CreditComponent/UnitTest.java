@@ -64,19 +64,19 @@ public class UnitTest {
 	public void testcalculateCoefficient(){		
 		credit.setMargin(0);
 		creditManager.setWIBOR(20);
-		credit.setDuration(3);
+		creditManager.setDuration(3);
 		assertEquals(1.213, creditManager.calculateCoefficient(),0.01);
 		credit.setMargin(20);
 		creditManager.setWIBOR(0);
-		credit.setDuration(3);
+		creditManager.setDuration(3);
 		assertEquals(1.213, creditManager.calculateCoefficient(),0.01);
 		credit.setMargin(5);
 		creditManager.setWIBOR(5);
-		credit.setDuration(0);
+		creditManager.setDuration(0);
 		assertEquals(1, creditManager.calculateCoefficient(),0.01);
 		credit.setMargin(2);
 		creditManager.setWIBOR(2);
-		credit.setDuration(2);
+		creditManager.setDuration(2);
 		assertEquals(1.0268, creditManager.calculateCoefficient(),0.01);
 	}
 	
