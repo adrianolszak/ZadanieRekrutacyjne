@@ -125,7 +125,7 @@ public class CreditManager {
 			}
 			old =  day + "." +month + "." + year;			
 		}
-		System.out.println(credit.getRepaidAmount());
+	
 		credit.setOverpaidAmount(0);
 		credit.setRepaidAmount((-1) * credit.getRepaidAmount());
 		this.duration = credit.getDuration();
