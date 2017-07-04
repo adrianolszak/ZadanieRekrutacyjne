@@ -2,7 +2,7 @@ package com.component.CreditComponent;
 
 public class Credit {
 	private int loanAmount;
-	private int	duration;
+	private int duration;
 	private double margin;
 	private double wIBOR;
 	private double overpaymentAmount;
