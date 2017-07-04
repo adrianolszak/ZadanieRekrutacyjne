@@ -33,9 +33,9 @@ public class UnitTest {
 	    Mockito.when(credit.getDuration()).thenReturn(60);
 	    Mockito.when(credit.getLoanAmount()).thenReturn(300000);
 	    Mockito.when(credit.getMargin()).thenReturn(2.0);
-	    Mockito.when(credit.getOverpaidAmount()).thenReturn(0.0);
+//	    Mockito.when(credit.getOverpaidAmount()).thenReturn(0.0);
 	    Mockito.when(credit.getOverpaymentAmount()).thenReturn(0.0);
-	    Mockito.when(credit.getRepaidAmount()).thenReturn(0.0);
+//	    Mockito.when(credit.getRepaidAmount()).thenReturn(0.0);
 	    Mockito.when(credit.getwIBOR()).thenReturn(2.0);
 	    Mockito.when(operation.getDate()).thenReturn("15.07.2017");
 	    Mockito.when(operation.getOperation()).thenReturn("Zmiana WIBOR");
@@ -107,13 +107,19 @@ public class UnitTest {
 	public void testcalculateRemainingAmount(){
 	assertEquals(300000, creditManager.calculateRemainingAmount(),0.01);
 	when(credit.getLoanAmount()).thenReturn(200);
-	when(credit.getRepaidAmount()).thenReturn(300.0);
+	creditManager.setRepaidAmount(300);
 	assertEquals(0, creditManager.calculateRemainingAmount(),0.01);
 	}
 	
 	@Test
 	public void testcalculateCapitalPart(){
 		assertEquals(7295.41 - 4000, creditManager.calculateCapitalPart(),0.01);
+	}
+	@Test
+	public void testmainCaluclate() throws ParseException{
+		assertEquals(137725.02, creditManager.mainCaluclate(),0.01);
+		assertEquals(137725.02, creditManager.mainCaluclate(),0.01);
+
 	}	
 
 }

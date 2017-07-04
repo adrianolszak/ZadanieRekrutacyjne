@@ -6,8 +6,6 @@ public class Credit {
 	private double margin;
 	private double wIBOR;
 	private double overpaymentAmount;
-	private double overpaidAmount;
-	private double repaidAmount;
 	
 	public Credit(int loanAmount, int duration, double margin, double wIBOR, double overpaymentAmount) {
 		this.loanAmount = loanAmount;
@@ -15,8 +13,6 @@ public class Credit {
 		this.margin = margin;
 		this.wIBOR = wIBOR;
 		this.overpaymentAmount = overpaymentAmount;
-		this.overpaidAmount = 0;
-		this.repaidAmount = 0;
 	}
 	public int getLoanAmount() {
 		return loanAmount;
@@ -47,18 +43,6 @@ public class Credit {
 	}
 	public void setOverpaymentAmount(double overpaymentAmount) {
 		this.overpaymentAmount = overpaymentAmount;
-	}
-	public double getOverpaidAmount() {
-		return overpaidAmount;
-	}
-	public void setOverpaidAmount(double overpaidAmount) {
-		this.overpaidAmount = overpaidAmount;
-	}
-	public double getRepaidAmount() {
-		return repaidAmount;
-	}
-	public void setRepaidAmount(double repaidAmount) {
-		this.repaidAmount += repaidAmount;
 	}
 	
 }
