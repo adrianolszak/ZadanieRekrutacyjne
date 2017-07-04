@@ -9,15 +9,14 @@ public class Credit {
 	private double overpaidAmount;
 	private double repaidAmount;
 	
-	public Credit(int loanAmount, int duration, double margin, double wIBOR, double overpaymentAmount,
-			double overpaidAmount, double repaidAmount) {
+	public Credit(int loanAmount, int duration, double margin, double wIBOR, double overpaymentAmount) {
 		this.loanAmount = loanAmount;
 		this.duration = duration;
 		this.margin = margin;
 		this.wIBOR = wIBOR;
 		this.overpaymentAmount = overpaymentAmount;
-		this.overpaidAmount = overpaidAmount;
-		this.repaidAmount = repaidAmount;
+		this.overpaidAmount = 0;
+		this.repaidAmount = 0;
 	}
 	public int getLoanAmount() {
 		return loanAmount;

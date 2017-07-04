@@ -14,7 +14,7 @@ public class DebtorPlanSteps {
 	double creditCost;
 	@Given("^Kredytobiorca zaciaga kredyt hipoteczny w wysokosci (\\d+) PLN na (\\d+) miesiecy w banku z marza (.+)% kredytobiorca chce co miesiac nadplacac kredyt stala kwota (\\d+) PLN, WIBOR wynosi (\\d+)%$")
 	public void Kredytobiorca_zaciaga_kredyt_hipoteczny_w_wysokosci_PLN_na_miesiecy_w_banku_z_marza_kredytobiorca_chce_co_miesiac_nadplacac_kredyt_stala_kwota_PLN_WIBOR_wynosi(int wysokośćKredytu, int czasTrwania, double marżaBanku, double kwotaNadpłacania, double wibor) throws Throwable {
-	kredytobiorca = new Credit(wysokośćKredytu, czasTrwania, marżaBanku, wibor, kwotaNadpłacania, 0, 0);
+	kredytobiorca = new Credit(wysokośćKredytu, czasTrwania, marżaBanku, wibor, kwotaNadpłacania);
 	}
 	
 	@Given("^Zmienialy sie rozne parametry$")
